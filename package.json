@@ -1,0 +1,34 @@
+{
+  "name": "gmailx",
+  "description": "send email with similar input as `mailx -t` using Google's free SMTP server",
+  "version": "0.0.0",
+  "author": "Dave Eddy <dave@daveeddy.com> (http://www.daveeddy.com)",
+  "contributors": [],
+  "preferGlobal": true,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bahamas10/node-gmailx.git"
+  },
+  "bin": {
+    "gmailx": "./gmailx.js"
+  },
+  "scripts": {
+    "test": "for f in tests/*.js; do echo \"$f\"; node \"$f\" || exit 1; done; echo 'Passed!'"
+  },
+  "dependencies": {
+    "nodemailer": "^1.4.0",
+    "strsplit": "^1.0.0"
+  },
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  },
+  "engine": "node >= 0.8.0",
+  "keywords": [
+    "gmail",
+    "mail",
+    "sendmail",
+    "mailx"
+  ]
+}
