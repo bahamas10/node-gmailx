@@ -32,6 +32,26 @@ If you specify a non-gmail address you will see
     $ echo $?
     1
 
+CLI Options
+
+    $ gmailx -h
+    Usage: gmailx [-c cc] [-b bcc] [-a attachment/file] to ...
+
+    mimic mailx but use googles free SMTP server for Gmail
+
+    options
+      -a, --attachment <path>  filename to send as an attachment
+      -b, --bcc <addr>         address to bcc to
+      -c, --cc <addr>          address to cc to
+      -d, --debug              turn on debugging information
+      -h, --help               print this message and exit
+      -r, --from <addr>        address to email from
+      -s, --subject <line>     subject line to use
+      -S, --header <foo=bar>   a raw header to specify
+      -t, --raw-mode           specify To:, From:, Reply-To:, etc. over stdin
+      -u, --updates            check for available updates
+      -v, --version            print the version number and exit
+
 License
 -------
 
