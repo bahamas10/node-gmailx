@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 /**
- * send email with similar input as `mailx` using Google's
- * free SMTP server
+ * Send email easily on the command line without running a server
  *
  * Author: Dave Eddy <dave@daveeddy.com>
  * Date: July 10, 2015
@@ -21,12 +20,13 @@ var package = require('./package.json');
 var USAGE = [
   'Usage: gmailx [-c cc] [-b bcc] [-a attachment/file] to ...',
   '',
-  'mimic mailx but use googles free SMTP server for Gmail',
+  'Send email easily on the command line without running a server',
   '',
   'options',
   '  -a, --attachment <path>  filename to send as an attachment',
   '  -b, --bcc <addr>         address to bcc to',
   '  -c, --cc <addr>          address to cc to',
+  '  -C, --config <config>    JSON file to be passed to nodemailer.createTransport',
   '  -d, --debug              turn on debugging information',
   '  -h, --help               print this message and exit',
   '  -r, --from <addr>        address to email from',
@@ -44,6 +44,7 @@ var options = [
   'a:(attachment)',
   'b:(bcc)',
   'c:(cc)',
+  'C:(config)',
   'd(debug)',
   'h(help)',
   'r:(from)',
@@ -51,10 +52,14 @@ var options = [
   'S:(header)',
   't(raw-mode)',
   'u(updates)',
-  'v(version)'
+  'v(version)',
 ].join('');
 var parser = new getopt.BasicParser(options, process.argv);
 
+var config = {
+  host: 'aspmx.l.google.com',
+  port: 25,
+};
 var headers = {};
 var opts = {
   attachments: [],
@@ -70,6 +75,7 @@ while ((option = parser.getopt())) {
     case 'a': opts.attachments.push({path: option.optarg}); break;
     case 'b': opts.bcc.push(option.optarg); break;
     case 'c': opts.cc.push(option.optarg); break;
+    case 'C': config = JSON.parse(fs.readFileSync(option.optarg, 'utf8')); break;
     case 'd': debug = console.error; break;
     case 'h': console.log(USAGE); process.exit(0);
     case 'r': opts.from.push(option.optarg); break;
@@ -93,6 +99,8 @@ while ((option = parser.getopt())) {
 }
 if (!rawmode)
   opts.to = opts.to.concat(process.argv.slice(parser.optind()));
+
+debug('nodemailer.createTransport(%s)', JSON.stringify(config));
 
 var input = fs.readFileSync('/dev/stdin', 'utf8');
 
@@ -122,11 +130,7 @@ if (rawmode) {
 }
 
 // create the emailer
-var transporter = nodemailer.createTransport({
-  host: 'aspmx.l.google.com',
-  port: 25,
-  //secure: true
-});
+var transporter = nodemailer.createTransport(config);
 
 if (headers.from)
   opts.from.push(headers.from);

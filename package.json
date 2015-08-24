@@ -1,6 +1,6 @@
 {
   "name": "gmailx",
-  "description": "send email with similar input as `mailx -t` using Google's free SMTP server",
+  "description": "Send email easily on the command line without running a server",
   "version": "0.0.1",
   "author": "Dave Eddy <dave@daveeddy.com> (http://www.daveeddy.com)",
   "contributors": [],
