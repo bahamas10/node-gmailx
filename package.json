@@ -1,7 +1,7 @@
 {
   "name": "gmailx",
   "description": "Send email easily on the command line without running a server",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Dave Eddy <dave@daveeddy.com> (http://www.daveeddy.com)",
   "contributors": [],
   "preferGlobal": true,
