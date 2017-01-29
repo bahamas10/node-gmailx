@@ -34,7 +34,7 @@ If you specify a non-gmail address you will see
 
 You can alternatively construct everything on the command line, ie.
 
-    gmailx -a foo.pdf -S 'your document' -Sreply-to=foo@bar.com recipient@example.com <<-EOF
+    gmailx -a foo.pdf -s 'your document' -Sreply-to=foo@bar.com recipient@example.com <<-EOF
     Attached is your pdf
     EOF
 
